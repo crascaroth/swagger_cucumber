@@ -1,23 +1,27 @@
 {
-  "name": "swagger_cucumber",
+  "name": "HelloCucumber",
   "version": "1.0.0",
-  "description": "for the tests i'll use this API: https://bookstore.toolsqa.com/swagger/\r Using BDD Cucumber to realize the tests and Pactum to Communicate with the API",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "cucumber-js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/crascaroth/swagger_cucumber.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/crascaroth/swagger_cucumber/issues"
-  },
-  "homepage": "https://github.com/crascaroth/swagger_cucumber#readme",
   "devDependencies": {
-    "@cucumber/cucumber": "^7.2.1"
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.0",
+    "@babel/node": "^7.13.13",
+    "@babel/preset-env": "^7.14.1",
+    "@babel/register": "^7.13.16",
+    "@cucumber/cucumber": "^7.2.1",
+    "chai": "^4.3.4",
+    "cucumber": "^6.0.5",
+    "mocha": "^8.4.0",
+    "supertest": "^6.1.3"
+  },
+  "dependencies": {
+    "pactum": "^3.0.13"
   }
 }

@@ -1,44 +1,20 @@
 const assert = require('assert');
 const { Given, When, Then } = require('@cucumber/cucumber');
 
-
-function incomeBooks(requisition, URL) {
-    const pactum = require('pactum')
-
-    requisition = requisition.toLower()
-    console.log(requisition)
-    let result
-  
-    switch (requisition) {
-
-        case "get":
-            result = await pactum.spec().get(process.env.BASE_URL + URL)
-            break;
-
-        case "put":
-            result = await pactum.spec().put(process.env.BASE_URL + URL)
-            break;
-
-        default:
-            new Error("Not a valid Requisition");
-            break;
-    }
-
-    // if (result === books) {
-    //     return "books";
-    // } else {
-    //     return "No";
-    // }
-}
-
-Given('{string}', function (URL) {
-    this.requisition = URL;
+When('i use {string}', function (string) {
+    // Write code here that turns the phrase above into concrete actions
+    return 'pending';
 });
 
-When('I use {string}', function (requisition) {
-    this.actualAnswer = incomeBooks(this.requisition, this.URL);
-});
+Given("{string}", function (string) {
+    
 
-Then('I should receive {string}', function (expectedAnswer) {
-    assert.strictEqual(this.actualAnswer, expectedAnswer);
-});
+})
+
+When("i use <var>", function(string) {
+        
+})
+
+Then("", {
+    
+})
