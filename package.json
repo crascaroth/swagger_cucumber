@@ -1,0 +1,27 @@
+{
+  "name": "HelloCucumber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.0",
+    "@babel/node": "^7.13.13",
+    "@babel/preset-env": "^7.14.1",
+    "@babel/register": "^7.13.16",
+    "@cucumber/cucumber": "^7.2.1",
+    "chai": "^4.3.4",
+    "cucumber": "^6.0.5",
+    "mocha": "^8.4.0",
+    "supertest": "^6.1.3"
+  },
+  "dependencies": {
+    "pactum": "^3.0.13"
+  }
+}
