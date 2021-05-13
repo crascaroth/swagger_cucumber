@@ -3,53 +3,60 @@ const defineSupportCode = require('cucumber').defineSupportCode;
 const pactum = require('pactum');
 require('dotenv').config()
 
-defineSupportCode(function({ Given, Then, When }) {  
+defineSupportCode(function ({ Given, Then, When }) {
   let answer = 0
-  let URL ="";
-  let requisition =""
+  let URL = "";
+  let requisition = ""
+  let ISBN = ""
 
-  Given("I have an url {string}", function(input) {
-  URL = input;
+  Given("I have an url {string}", (input) => {
+    URL = input;
   });
 
-  When("I use {string}", function(input){
-  requisition = input;
+  When("I use {string}", (input) => {
+    requisition = input;
   })
 
-  Then("I should receive {string}", async(input) => {   
-   assert.equal(await verifyGet(URL,requisition), input)
+  Then("I should receive {string}", async (input) => {
+    assert.equal(await verifyGet(), input)
   })
 
-  const verifyGet = async (URL,requisition) => {
+  const verifyGet = async () => {
     let result
 
-    if(requisition === "get"){
-    
-    result = await pactum.spec().get(process.env.BASE_URL + URL)
-  
+    if (requisition === "get") {
 
-    // console.log("result", result.body.books)
-    // console.log("TypeOfresult", typeof result.body.books)
+      result = await pactum.spec().get(process.env.BASE_URL + URL)
 
-    if(typeof result.body.books === "object") {return "array"}
-    else { return undefined }
+      if (typeof result.body.books === "object") { return "array" }
+      else { return undefined }
 
     }
     else { return undefined }
   }
- 
- 
- 
-  // Given('I start with {int}', function (input) {
-  //   answer = input;
-  // });
- 
-  // When('I add {int}', function (input) {
-  //   answer = answer + input;
-  // });
-  // Then('I end up with {int}', function (input) {
-  //   assert.equal(answer, input);
-  // });
+
+
+  Given("I have an url {string} with ISBN {string}", (inputURL, inputISBN) => {
+    URL = inputURL
+    ISBN = inputISBN
+  })
+
+  Then("I should receive a specific {string}", async (type) => {
+    assert.equal(await verifyBookISBN(), type)
+  })
+
+  const verifyBookISBN = async () => {
+    let result
+    if (requisition === "get") {
+      result = await pactum.spec().get(process.env.BASE_URL + URL + "?ISBN=" + ISBN)
+      
+      console.log("result.body.isbn",result.body.isbn)
+      if(result.body.isbn === ISBN){ return "object"}
+      else{ return undefined }
+    }
+    else { return undefined }
+
+  }
 
 });
 
