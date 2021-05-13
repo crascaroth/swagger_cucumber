@@ -1,10 +1,10 @@
 Feature: Getting a book by ISBN
     Scenario: Getting Specific Valid Book 
-        Given I have an url "/BookStore/v1/Book" with ISBN "9781449325862"
-        When I use "get"
-        Then I should receive a specific "object"
+        Given I access the API Swagger
+        When I want to find a book with ISBN "9781449325862"
+        Then I should receive the book with ISBN "9781449325862"
 
     Scenario: Getting Specific Invalid Book 
-        Given I have an url "/BookStore/v1/Book" with ISBN "assd"
-        When I use "get"
-        Then I should receive a specific "object"
+        Given I access the API Swagger
+        When I want to find a book with ISBN "assd"
+        Then I should not receive the book with ISBN "assd"

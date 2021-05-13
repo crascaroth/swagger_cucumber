@@ -8,51 +8,53 @@ defineSupportCode(function ({ Given, Then, When }) {
   let URL = "";
   let requisition = ""
   let ISBN = ""
+  let accessAPISwagger = false
 
-  Given("I have an url {string}", (input) => {
-    URL = input;
+  Given("I access the API Swagger", () => {
+    accessAPISwagger = true
   });
 
-  When("I use {string}", (input) => {
-    requisition = input;
+  When("I want to find all Books", () => {
+    URL = "/BookStore/v1/Books";
+
   })
 
-  Then("I should receive {string}", async (input) => {
-    assert.equal(await verifyGet(), input)
+  Then("I should receive all Books", async () => {
+    assert.equal(await verifyGet(), "All Books Received")
   })
 
   const verifyGet = async () => {
     let result
-
-    if (requisition === "get") {
-
+    if (accessAPISwagger) {
       result = await pactum.spec().get(process.env.BASE_URL + URL)
-
-      if (typeof result.body.books === "object") { return "array" }
+      if (result.body.books) { return "All Books Received" }
       else { return undefined }
-
     }
     else { return undefined }
+
   }
 
 
-  Given("I have an url {string} with ISBN {string}", (inputURL, inputISBN) => {
-    URL = inputURL
-    ISBN = inputISBN
+  When("I want to find a book with ISBN {string}", (inputISBN) => {
+    URL = "/BookStore/v1/Book?ISBN=" + inputISBN
   })
 
-  Then("I should receive a specific {string}", async (type) => {
-    assert.equal(await verifyBookISBN(), type)
+  Then("I should receive the book with ISBN {string}", async (outputISBN) => {
+    assert.equal(await verifyBookISBN(), outputISBN)
+  })
+
+  Then("I should not receive the book with ISBN {string}", async (outputISBN) => {
+    assert.notEqual(await verifyBookISBN(), outputISBN)
   })
 
   const verifyBookISBN = async () => {
     let result
-    if (requisition === "get") {
-      result = await pactum.spec().get(process.env.BASE_URL + URL + "?ISBN=" + ISBN)
-      
-      console.log("result.body.isbn",result.body.isbn)
-      if(result.body.isbn === ISBN){ return "object"}
-      else{ return undefined }
+    if (accessAPISwagger) {
+      result = await pactum.spec().get(process.env.BASE_URL + URL)
+
+      // console.log("result.body.isbn", result.body)
+      if (result.body) { return result.body.isbn }
+      else { return undefined }
     }
     else { return undefined }
 

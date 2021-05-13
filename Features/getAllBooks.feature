@@ -1,6 +1,6 @@
 Feature: Getting all books from the API
   Scenario: Getting Books
-    Given I have an url "/BookStore/v1/Books"
-    When I use "get"
-    Then I should receive "array"
+    Given I access the API Swagger
+    When I want to find all Books
+    Then I should receive all Books
 
